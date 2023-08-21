@@ -3,24 +3,23 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Requests\Post\UpdateRequest;
-use App\Models\Post;
+use App\Http\Requests\Post\UpdateProfileRequest;
+use App\Models\User;
 
-class UpdateController extends BaseController
+class UpdateProfileController extends BaseController
 {
-    public function __invoke(UpdateRequest $request, Post $post)
+    public function __invoke(UpdateProfileRequest $request, User $user)
     {
         $data = $request->validated();
 
         if ($request->image) {
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images/posts'), $imageName);
+            $request->image->move(public_path('images/profile_image'), $imageName);
 
             $data['image'] = $imageName;
-            $data['user_id'] = auth()->user()->id;
         }
 
-        $post->update($data);
+        $user->update($data);
 
         return redirect()->route('main.index');
     }

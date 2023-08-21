@@ -30,6 +30,8 @@
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+    <!-- fancyBox CSS -->
+    <link href="node_modules/@fancyapps/ui/dist/fancybox/fancybox.css" rel="stylesheet">
 
     <title>Novella</title>
 
@@ -38,10 +40,9 @@
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
-
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="profile_image/Mika.png" alt="Logo" height="100" width="70">
+        <img class="animation__shake" src="images/mainPhotos/Mika.png" alt="Logo" height="100" width="70">
     </div>
 
     <!-- Navbar -->
@@ -84,10 +85,10 @@
                 @endif
             @else
                 <li class="nav-item dropdown ">
-                    <a id="navbarDropdown" class="nav-link h-25 dropdown-toggle text-white text-center fs-3"
+                    <a id="navbarDropdown" class="nav-link h-25 dropdown-toggle text-white text-center" style="font-size: calc(13px + 7 *(100vw / 1200))"
                        href="#"
                        role="button"
-                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ Auth::user()->name }}
                     </a>
 
@@ -122,7 +123,7 @@
                 @can('view', auth()->user())
                     <div class="image">
                         <img class="img-circle elevation-2"
-                             src="profile_image/{{Auth::user()->image}}" alt="logo">
+                             src="images/profile_image/{{Auth::user()->image}}" alt="logo">
                     </div>
 
                     <div class="info">
@@ -140,22 +141,32 @@
                     data-accordion="false">
                     <li class="nav-item">
                         <a href="{{ route('main.index') }}" class="nav-link">
-                            <i class="nav-icon far fa-calendar-alt"></i>
+                            <i class="nav-icon fas fa-table"></i>
                             <p>
-                                Всего постов
+                                Все посты
                                 <span class="badge badge-info right">{{\App\Models\Post::all()->count() }}</span>
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon far fa-image"></i>
+                        <a href="{{route('users.index')}}" class="nav-link">
+                            <i class="nav-icon fas fa-book"></i>
                             <p>
                                 Пользователи
                                 <span class="badge badge-info right">{{\App\Models\User::all()->count() }}</span>
                             </p>
                         </a>
                     </li>
+                    @can('view', auth()->user())
+                    <li class="nav-item">
+                        <a href="{{route('main.user.index', auth()->user()->id)}}" class="nav-link">
+                            <i class="nav-icon fas fa-edit"></i>
+                            <p>
+                                Профиль
+                            </p>
+                        </a>
+                    </li>
+                    @endcan
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -164,7 +175,7 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="background-image: url({{ asset('images/mainPhotos/fon.jpg')}}); background-repeat: repeat">
         <!-- Content Header (Page header) -->
         <!-- /.content-header -->
 
@@ -173,9 +184,7 @@
             <div class="container-fluid">
                 <!-- Main row -->
                 <div class="row">
-
                     <section class="col-lg-7 connectedSortable container">
-
                         @yield('content')
 
                     </section>
@@ -187,11 +196,11 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    <footer class="main-footer">
+    <footer class="main-footer bg-dark">
         <strong>Copyright &copy; 2023 || All rights reserved. </strong>
 
         <div class="float-right d-none d-sm-inline-block">
-            <b>Handcrafted by <a href="https://vk.com/belan29">Why Mika?</a> </b>
+            <b>Handcrafted by <a class="text-white" href="https://vk.com/belan29">Why Mika?</a> </b>
         </div>
     </footer>
 
@@ -234,5 +243,12 @@
 <script src="dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
+<!-- fancyBox JS -->
+<script>
+    $('#imageModal').on('show.bs.modal', function (event) {
+        var clickedImageSrc = $(event.relatedTarget).attr("src");
+        $("#modalImage").attr("src", clickedImageSrc);
+    });
+</script>
 </body>
 </html>

@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PostUpdateMiddleware
+class ProfileUpdateMiddleware
 {
     /**
      * Handle an incoming request.

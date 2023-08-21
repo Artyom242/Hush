@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/', MainController::class)->name('main.index');
-    Route::get('/main/user/{post}', ShowController::class)->name('main.user.index');
+    Route::get('/main/user/{user}', ShowController::class)->name('main.user.index');
+    Route::get('/main/users', IndexUsersController::class)->name('users.index')->middleware('ProfileUpdateMiddleware');
 });
 
 Route::group(['namespace' => 'App\Http\Controllers\User', 'prefix' => 'user', 'middleware' => 'user'], function () {
@@ -23,8 +24,12 @@ Route::group(['namespace' => 'App\Http\Controllers\User', 'prefix' => 'user', 'm
     Route::post('/posts', StoryController::class)->name('user.posts.story');
     Route::group(['middleware' => 'PostUpdateMiddleware'], function () {
         Route::get('/posts/{post}/edit', EditController::class)->name('user.posts.edit');
+        Route::get('/profile/{user}/edit', EditProfileController::class)->name('user.profile.edit');
     });
+
+    Route::get('/profile/{user}/edit', EditProfileController::class)->name('user.profile.edit')->middleware('ProfileUpdateMiddleware');
     Route::patch('/posts/{post}', UpdateController::class)->name('user.posts.update');
+    Route::patch('/profile/{user}', UpdateProfileController::class)->name('user.profile.update');
     Route::delete('/posts/{post}', DestroyController::class)->name('user.posts.destroy');
 });
 

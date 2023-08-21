@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\PostUpdateMiddleware;
+use App\Http\Middleware\ProfileUpdateMiddleware;
 use App\Http\Middleware\User;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -67,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user' => User::class,
         'PostUpdateMiddleware' => PostUpdateMiddleware::class,
+        'ProfileUpdateMiddleware' => ProfileUpdateMiddleware::class,
     ];
 }
