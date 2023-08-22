@@ -22,7 +22,7 @@
                             <a class="link-light text-white text-decoration-none"
                                href="{{route('main.user.index', $post->user_id)}}">
                                 <div class="d-flex align-items-center mb-3">
-                                    <img class="img-circle elevation-2" style="width: 50px"
+                                    <img class="img-circle elevation-2" style="height: 65px; width: 65px; object-fit: cover;"
                                          src="images/profile_image/{{\App\Models\User::find($post->user_id)->image}}"
                                          alt="logo">
 
@@ -34,7 +34,7 @@
 
                         @if ($post->image)
                             <figure class="mb-4 text-center"><img
-                                    class="img-fluid rounded" data-toggle="modal"
+                                    class="img-fluid rounded object-fit-cover" data-toggle="modal"
                                     data-target="#imageModal"
                                     src="images/posts/{{$post->image}}"
                                     alt="..."/></figure>

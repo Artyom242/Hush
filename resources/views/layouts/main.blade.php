@@ -119,10 +119,10 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
                 @can('view', auth()->user())
                     <div class="image">
-                        <img class="img-circle elevation-2"
+                        <img class="img-circle elevation-2" style="height: 45px; width: 45px; object-fit: cover;"
                              src="images/profile_image/{{Auth::user()->image}}" alt="logo">
                     </div>
 

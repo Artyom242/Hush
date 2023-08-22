@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container text-white">
-        <div class="py-4 px-2 mb-5 d-flex justify-content-between" style="background: #1f1f1f">
+        <div class="py-4 px-2 mb-5 d-flex position-relative" style="background: #1f1f1f">
             <div class="d-flex flex-column align-items-center m-auto">
                 <img class="img-circle elevation-2 mb-3" style="width: 90%; max-height: 75vh; object-fit: cover"
                      src="images/profile_image/{{$user->image}}" alt="">
@@ -10,7 +10,7 @@
             </div>
 
             @can('update', $user)
-                <div class="nav-item">
+                <div class="nav-item position-absolute" style="right: 20px">
                     <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
@@ -19,8 +19,8 @@
                                 d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                         </svg>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{route('user.profile.edit', $user->id)}}">Сменить фото</a>
+                    <div class="dropdown-menu dropdown-menu-right {" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item"  href="{{route('user.profile.edit', $user->id)}}">Сменить фото</a>
                         <a class="dropdown-item" href="{{route('user.profile.edit', $user->id)}}">Изменить имя</a>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                                     <a class="link-light text-white text-decoration-none"
                                        href="{{route('main.user.index', $post->user_id)}}">
                                         <div class="d-flex align-items-center">
-                                            <img class="img-circle elevation-2 " style="width: 20%; object-fit: cover;"
+                                            <img class="img-circle elevation-2" style="height: 65px; width: 65px; object-fit: cover;"
                                                  src="images/profile_image/{{\App\Models\User::find($post->user_id)->image}}"
                                                  alt="logo">
 

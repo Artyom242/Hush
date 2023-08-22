@@ -7,10 +7,10 @@
             @foreach($users as $user)
                 <div class="my-3 text-white" style="border-bottom: #a9a9a9 3px ridge">
                     <div class="row">
-                        <a class="link-light " href="{{route('main.user.index', $user->id)}}">
+                        <a class="link-light text-decoration-none" href="{{route('main.user.index', $user->id)}}">
                             <div class=" py-2 mb-3" style="background: rgba(42,42,42,0.94); border-radius: 10px">
                                 <div class=" d-flex align-items-center">
-                                    <img class="img-circle elevation-2 mr-3" style="width: 60px"
+                                    <img class="img-circle elevation-2 mr-3" style="height: 80px; width: 80px; object-fit: cover;"
                                          src="images/profile_image/{{$user->image}}" alt="">
                                     <h2 class="fs-3 mb-0">{{$user->name}}</h2>
                                 </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,11 +34,11 @@ Route::group(['namespace' => 'App\Http\Controllers\User', 'prefix' => 'user', 'm
     Route::delete('/posts/{post}', DestroyController::class)->name('user.posts.destroy');
 });
 
-
-
+Route::post('/forget-password', [ForgotPasswordController::class, 'forgetPasswordPost'])->name('password.email');
+Route::get('/reset-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
