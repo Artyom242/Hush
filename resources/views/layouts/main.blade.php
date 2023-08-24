@@ -33,7 +33,7 @@
     <!-- fancyBox CSS -->
     <link href="node_modules/@fancyapps/ui/dist/fancybox/fancybox.css" rel="stylesheet">
 
-    <title>Novella</title>
+    <title>Hush</title>
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 

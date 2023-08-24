@@ -15,7 +15,7 @@ class StoryController extends BaseController
         if ($request->text || $request->image != null) {
             if ($request->image) {
                 $imageName = time() . '.' . $request->image->extension();
-                $request->image->move(public_path('posts'), $imageName);
+                $request->image->move(public_path('images/posts'), $imageName);
 
                 $data['image'] = $imageName;
             }

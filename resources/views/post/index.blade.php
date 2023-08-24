@@ -59,8 +59,8 @@
                         @endif
 
                         <!-- Post content-->
-                        <section class="mb-4">
-                            <p class="fs-5 lh-sm">{{$post->text}}</p>
+                        <section class="mb-4 px-2">
+                            <p class="fs-5 lh-sm">{!!nl2br(e($post->text))!!}</p>
                         </section>
 
                         <div class="text-gray fst-italic">Выложено {{$post->created_at}}</div>
