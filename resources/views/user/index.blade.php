@@ -26,7 +26,8 @@
                 </div>
             @endcan
         </div>
-        <div>
+
+        <div class="mb-5">
             @can('update', $user)
                 <a class="align-items-center" href="{{ route('user.posts.create') }}">
                     <div type="button"
@@ -35,7 +36,9 @@
                     </div>
                 </a>
             @endcan
+        </div>
 
+        <div>
             @foreach($posts as $post)
                 <div class="my-5 text-white" style="border-bottom: #a9a9a9 3px ridge">
                     <div class="row">
