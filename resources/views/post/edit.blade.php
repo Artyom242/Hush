@@ -9,7 +9,7 @@
                 <div class="col-lg-7">
                     <div class="form-group">
                         <label for="text" class="form-label">Text</label>
-                        <textarea placeholder="О чем хотите рассказать?" type="text" name="text" style="height: 192px" class="form-control"id="text">{!! e($post->text) !!}</textarea>
+                        <textarea placeholder="О чем хотите рассказать?" type="text" name="text" class="form-control" id="text">{{$post->text}}</textarea>
                         @error('text')
                         <p class="text-danger">{{$message}}</p>
                         @enderror

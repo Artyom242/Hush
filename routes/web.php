@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,20 +21,30 @@ Route::group(['namespace' => 'App\Http\Controllers\Main'], function () {
     Route::get('/main/users', IndexUsersController::class)->name('users.index')->middleware('ProfileUpdateMiddleware');
 });
 
-Route::group(['namespace' => 'App\Http\Controllers\User', 'prefix' => 'user', 'middleware' => 'user'], function () {
-    Route::get('/posts/create', CreateController::class)->name('user.posts.create');
-    Route::post('/posts', StoryController::class)->name('user.posts.story');
-    Route::group(['middleware' => 'PostUpdateMiddleware'], function () {
-        Route::get('/posts/{post}/edit', EditController::class)->name('user.posts.edit');
-        Route::get('/profile/{user}/edit', EditProfileController::class)->name('user.profile.edit');
+Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
+    Route::group(['namespace' => 'App\Http\Controllers\User'], function (){
+        Route::get('/posts/create', CreateController::class)->name('user.posts.create');
+        Route::post('/posts', StoryController::class)->name('user.posts.story');
+        Route::group(['middleware' => 'PostUpdateMiddleware'], function () {
+            Route::get('/posts/{post}/edit', EditController::class)->name('user.posts.edit');
+            Route::get('/profile/{user}/edit', EditProfileController::class)->name('user.profile.edit');
+        });
+
+        //действия с профилем
+        Route::get('/profile/{user}/edit', EditProfileController::class)->name('user.profile.edit')->middleware('ProfileUpdateMiddleware');
+        Route::patch('/posts/{post}', UpdateController::class)->name('user.posts.update');
+        Route::patch('/profile/{user}', UpdateProfileController::class)->name('user.profile.update');
+        Route::delete('/posts/{post}', DestroyController::class)->name('user.posts.destroy');
     });
 
-    Route::get('/profile/{user}/edit', EditProfileController::class)->name('user.profile.edit')->middleware('ProfileUpdateMiddleware');
-    Route::patch('/posts/{post}', UpdateController::class)->name('user.posts.update');
-    Route::patch('/profile/{user}', UpdateProfileController::class)->name('user.profile.update');
-    Route::delete('/posts/{post}', DestroyController::class)->name('user.posts.destroy');
+
+    Route::group(['namespace' => 'App\Http\Controllers\Like', 'prefix' => '{post}/likes' ], function (){
+        Route::post('/', StoryLikeController::class)->name('user.likes.story');
+    });
+
 });
 
+//авторизация/регистрация
 Route::post('/forget-password', [ForgotPasswordController::class, 'forgetPasswordPost'])->name('password.email');
 Route::get('/reset-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 

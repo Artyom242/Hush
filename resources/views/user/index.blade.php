@@ -26,8 +26,7 @@
                 </div>
             @endcan
         </div>
-
-        <div class="mb-5">
+        <div>
             @can('update', $user)
                 <a class="align-items-center" href="{{ route('user.posts.create') }}">
                     <div type="button"
@@ -36,9 +35,7 @@
                     </div>
                 </a>
             @endcan
-        </div>
 
-        <div>
             @foreach($posts as $post)
                 <div class="my-5 text-white" style="border-bottom: #a9a9a9 3px ridge">
                     <div class="row">
@@ -100,8 +97,8 @@
                                 @endif
 
                                 <!-- Post text-->
-                                <section class="mb-4 px-2">
-                                    <p class="fs-5 lh-sm">{!!nl2br(e($post->text))!!}</p>
+                                <section class="mb-4">
+                                    <p class="fs-5 lh-sm">{{$post->text}}</p>
                                 </section>
 
                                 <div class="text-gray fst-italic">Выложено {{$post->created_at}}</div>

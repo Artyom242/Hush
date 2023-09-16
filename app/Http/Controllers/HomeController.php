@@ -25,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(10);
+        $posts = Post::latest()->paginate(10)->withCount();
+        $likedPosts = Post::withCount('user_id')->orderBy();
 
         return view('post.index', compact('posts'));
     }
