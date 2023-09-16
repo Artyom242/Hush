@@ -70,11 +70,11 @@
                             </div>
                             @auth()
                                 <dvi class="bg-dark h-25 d-flex gap-1 px-1 py-1 rounded-2 align-items-center ">
-                                    <p class="m-0 text-sm">{{\App\Models\Like::all()->count()}}</p>
                                     <form action="{{route('user.likes.story', $post->id)}}" method="post">
                                         @csrf
+                                        <span>{{$post->liked_users_count}}</span>
                                         <button class="border-0 bg-transparent" type="submit">
-                                            @if(auth()->user())
+                                            @if(auth()->user()->likedPosts->contains($post->id))
                                                 <i class="fas fa-heart text-red"></i>
                                             @else
                                                 <i class="far fa-heart"></i>
@@ -86,7 +86,7 @@
 
                             @guest()
                                 <dvi class="bg-dark h-25 d-flex gap-1 px-1 py-1 rounded-2 align-items-center ">
-                                    <p class="m-0 text-sm">{{\App\Models\Like::all()->count()}}</p>
+                                    <span>{{$post->liked_users_count}}</span>
                                     <i class="far fa-heart"></i>
                                 </dvi>
                             @endguest

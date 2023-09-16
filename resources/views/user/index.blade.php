@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class=" py-2 mb-5" style="background: rgba(42,42,42,0.94); border-radius: 10px">
                             <!-- Post content-->
-                            <article class="">
+                            <article>
                                 <!-- Post header-->
                                 <header class="mb-3 d-flex justify-content-between">
                                     <a class="link-light text-white text-decoration-none"
@@ -101,7 +101,33 @@
                                     <p class="fs-5 lh-sm">{{$post->text}}</p>
                                 </section>
 
-                                <div class="text-gray fst-italic">Выложено {{$post->created_at}}</div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="text-gray fst-italic">
+                                        Выложено {{$post->dateAsCarbon->diffForHumans()}}
+                                    </div>
+                                    @auth()
+                                        <dvi class="bg-dark h-25 d-flex gap-1 px-1 py-1 rounded-2 align-items-center ">
+                                            <form action="{{route('user.likes.story', $post->id)}}" method="post">
+                                                @csrf
+                                                <span>{{$post->liked_users_count}}</span>
+                                                <button class="border-0 bg-transparent" type="submit">
+                                                    @if(auth()->user()->likedPosts->contains($post->id))
+                                                        <i class="fas fa-heart text-red"></i>
+                                                    @else
+                                                        <i class="far fa-heart"></i>
+                                                    @endif
+                                                </button>
+                                            </form>
+                                        </dvi>
+                                    @endauth
+
+                                    @guest()
+                                        <dvi class="bg-dark h-25 d-flex gap-1 px-1 py-1 rounded-2 align-items-center ">
+                                            <span>{{$post->liked_users_count}}</span>
+                                            <i class="far fa-heart"></i>
+                                        </dvi>
+                                    @endguest
+                                </div>
                             </article>
                         </div>
                     </div>
