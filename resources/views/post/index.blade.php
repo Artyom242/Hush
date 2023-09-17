@@ -22,7 +22,8 @@
                             <a class="link-light text-white text-decoration-none"
                                href="{{route('main.user.index', $post->user_id)}}">
                                 <div class="d-flex align-items-center mb-3">
-                                    <img class="img-circle elevation-2" style="height: 65px; width: 65px; object-fit: cover;"
+                                    <img class="img-circle elevation-2"
+                                         style="height: 65px; width: 65px; object-fit: cover;"
                                          src="images/profile_image/{{\App\Models\User::find($post->user_id)->image}}"
                                          alt="logo">
 
@@ -59,11 +60,37 @@
                         @endif
 
                         <!-- Post content-->
-                        <section class="mb-4 px-2">
-                            <p class="fs-5 lh-sm">{!!nl2br(e($post->text))!!}</p>
+                        <section class="mb-4">
+                            <p class="fs-5 lh-sm">{{$post->text}}</p>
                         </section>
 
-                        <div class="text-gray fst-italic">Выложено {{$post->created_at}}</div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="text-gray fst-italic">
+                                Выложено {{$post->dateAsCarbon->diffForHumans()}}
+                            </div>
+                            @auth()
+                                <dvi class="bg-dark h-25 d-flex gap-1 px-1 py-1 rounded-2 align-items-center ">
+                                    <form action="{{route('user.likes.story', $post->id)}}" method="post">
+                                        @csrf
+                                        <span>{{$post->liked_users_count}}</span>
+                                        <button class="border-0 bg-transparent" type="submit">
+                                            @if(auth()->user()->likedPosts->contains($post->id))
+                                                <i class="fas fa-heart text-red"></i>
+                                            @else
+                                                <i class="far fa-heart"></i>
+                                            @endif
+                                        </button>
+                                    </form>
+                                </dvi>
+                            @endauth
+
+                            @guest()
+                                <dvi class="bg-dark h-25 d-flex gap-1 px-1 py-1 rounded-2 align-items-center ">
+                                    <span>{{$post->liked_users_count}}</span>
+                                    <i class="far fa-heart"></i>
+                                </dvi>
+                            @endguest
+                        </div>
                     </article>
                 </div>
             </div>
@@ -77,6 +104,9 @@
             @if ($post->image)
             <th scope="row"><img class="img-fluid " style="height: 60px;" src="profile_image/{{$post->image}}"
                                      alt="logo"></th>
+
+
+
 
 
         @endif

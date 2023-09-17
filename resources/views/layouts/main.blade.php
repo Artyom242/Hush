@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <base href="{{asset('/')}}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
@@ -30,10 +31,8 @@
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-    <!-- fancyBox CSS -->
-    <link href="node_modules/@fancyapps/ui/dist/fancybox/fancybox.css" rel="stylesheet">
 
-    <title>Hush</title>
+    <title>Novella</title>
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -250,5 +249,7 @@
         $("#modalImage").attr("src", clickedImageSrc);
     });
 </script>
+<script src="ajaxLikes/likes.js"></script>
+
 </body>
 </html>
